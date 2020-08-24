@@ -2,7 +2,7 @@ import mouse, time, keyboard, pickle
 
 def start_tracking(config):
 	while config.run:
-		time.sleep(0.2)
+		time.sleep(0.1)
 		position = mouse.get_position()
 
 		config.mouse_points.append((config.get_time(), position))

@@ -1,0 +1,6 @@
+Linux Commands:
+sudo apt-get install ffmpeg # this is for pydub
+sudo apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 # this is for pyaudio
+
+Python libraries:
+mouse, keyboard, pydub, pyaudio

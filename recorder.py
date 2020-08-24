@@ -1,5 +1,11 @@
 import pyaudio
 import wave
+from pydub import AudioSegment
+
+def convert(config):
+	recording = AudioSegment.from_wav(config.params["audio"] + ".wav")
+	recording.normalize()
+	recording.export(config.params["audio"])
 
 def record(config):
 
@@ -8,7 +14,7 @@ def record(config):
 	RATE = 84100
 	CHUNK = 1024
 	RECORD_SECONDS = 10
-	WAVE_OUTPUT_FILENAME = config.params["audio"]
+	WAVE_OUTPUT_FILENAME = config.params["audio"] + ".wav"
 	 
 	audio = pyaudio.PyAudio()
 	 
@@ -33,4 +39,5 @@ def record(config):
 	waveFile.setframerate(RATE)
 	waveFile.writeframes(b''.join(frames))
 	waveFile.close()
+	convert(config)
 	print ("saved")

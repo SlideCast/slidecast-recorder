@@ -3,4 +3,6 @@ sudo apt-get install ffmpeg # this is for pydub
 sudo apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 # this is for pyaudio
 
 Python libraries:
-mouse, keyboard, pydub, pyaudio
+mouse, keyboard, pydub, pyaudio, tkinter (python3-tk)
+
+# screeninfo is also a possibility instead of tkinter, need to test

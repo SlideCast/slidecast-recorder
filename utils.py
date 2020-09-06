@@ -1,9 +1,17 @@
 import keyboard, mouse, time, json
 import os
 from zipfile import ZipFile 
+import shutil
 
 
+def get_resolution():
+	import tkinter as tk
 
+	root = tk.Tk()
+	width = root.winfo_screenwidth()
+	height = root.winfo_screenheight()
+
+	return {"width":width, "height":height}
 def on_press_key_args(key, callback, config, suppress=False):
     return keyboard.hook_key(key, lambda e: e.event_type == keyboard.KEY_UP or callback(config, e), suppress=suppress)
 
@@ -31,15 +39,22 @@ class Config:
 		return time.time() - self.base_time
 
 def save(params):
+	shutil.copyfile(params["original"], params["pdf"])
 	zipObj = ZipFile('output/recording.sld', 'w')
 
 	zipObj.write(params["mouse"])
 	zipObj.write(params["keyboard"])
 	zipObj.write(params["audio"])
-
+	zipObj.write(params["pdf"])
+	zipObj.write(params["metadata"])
 	zipObj.close()
 
 	os.remove(params["mouse"])
+	os.remove(params["pdf"])
 	os.remove(params["keyboard"])
 	os.remove(params["audio"])
+	os.remove(params["metadata"])
 	os.remove(params["audio"] + ".wav")
+
+if __name__=='__main__':
+	print (get_resolution())

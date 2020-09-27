@@ -1,0 +1,5 @@
+PyQt5==5.12.3
+mouse==0.7.1
+keyboard==0.13.5
+PyAudio==0.2.11
+pydub==0.24.1

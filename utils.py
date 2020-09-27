@@ -12,17 +12,19 @@ def get_resolution():
 	height = root.winfo_screenheight()
 
 	return {"width":width, "height":height}
-def on_press_key_args(key, callback, config, suppress=False):
-    return keyboard.hook_key(key, lambda e: e.event_type == keyboard.KEY_UP or callback(config, e), suppress=suppress)
+def on_press_key_args(key, callback, config, debugger=print, suppress=False):
+    return keyboard.hook_key(key, lambda e: e.event_type == keyboard.KEY_UP or callback(config, e, debugger), suppress=suppress)
 
 class Config:
-	def __init__(self, params):
+	def __init__(self, params={}):
 		self.params = params 
 		self.run = True
 		self.mouse_points = [] 
 		self.keyboard_points = []
 		self.continue_recording = True
 	
+	def set_params(self, params):
+		self.params = params
 	def start_logging(self):
 		self.base_time = time.time()
 

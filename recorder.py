@@ -7,7 +7,7 @@ def convert(config):
 	recording.normalize()
 	recording.export(config.params["audio"])
 
-def record(config):
+def record(config, debugger=print):
 
 	FORMAT = pyaudio.paInt16
 	CHANNELS = 2
@@ -21,13 +21,11 @@ def record(config):
 	stream = audio.open(format=FORMAT, channels=CHANNELS,
 	                rate=RATE, input=True,
 	                frames_per_buffer=CHUNK)
-	print ("recording...")
 	frames = []
 	 
 	while config.continue_recording:
 	    data = stream.read(CHUNK)
 	    frames.append(data)
-	print ("finished recording")
 	 
 	stream.stop_stream()
 	stream.close()
@@ -40,4 +38,3 @@ def record(config):
 	waveFile.writeframes(b''.join(frames))
 	waveFile.close()
 	convert(config)
-	print ("saved")
